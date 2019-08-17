@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
@@ -30,6 +32,31 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Navigation component dependencies
+    def navigation_component_version = "2.2.0-alpha01"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_component_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_component_version"
+
+    // Dagger dependencies
+    def dagger_Version = "2.24"
+    implementation "com.google.dagger:dagger:$dagger_Version"
+    implementation "com.google.dagger:dagger-android:$dagger_Version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_Version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_Version"
+
+    // Retrofit dependencies
+    def retrofit_version = "2.5.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+    // Room dependencies
+    def room_version = "2.2.0-alpha02"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }
