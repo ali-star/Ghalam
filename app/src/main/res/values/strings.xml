@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Ghalam</string>
+    <string name="search">Search</string>
+    
+    <!-- Fonts -->
+    <string name="roboto_regular">fonts/Roboto/Roboto-Regular.ttf</string>
+    <string name="take_a_note">Take a note…</string>
 </resources>
