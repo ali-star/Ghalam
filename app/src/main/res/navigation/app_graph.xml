@@ -14,5 +14,13 @@
     <fragment
             android:id="@+id/notesFragment"
             android:name="ir.siriusapps.ghalam.notes.NotesFragment"
-            android:label="NotesFragment" />
+            android:label="NotesFragment" >
+        <action
+                android:id="@+id/action_notesFragment_to_noteFragment"
+                app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/noteFragment"
+            android:name="ir.siriusapps.ghalam.note.NoteFragment"
+            android:label="NoteFragment" />
 </navigation>
