@@ -2,7 +2,7 @@ package ir.siriusapps.ghalam
 
 import com.google.gson.GsonBuilder
 import ir.siriusapps.ghalam.data.Note
-import ir.siriusapps.ghalam.network.ApiService
+import ir.siriusapps.ghalam.data.source.remote.ApiService
 import org.junit.Test
 
 class ApiServiceTest {

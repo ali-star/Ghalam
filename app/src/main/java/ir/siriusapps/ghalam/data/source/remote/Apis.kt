@@ -1,4 +1,4 @@
-package ir.siriusapps.ghalam.network
+package ir.siriusapps.ghalam.data.source.remote
 
 import ir.siriusapps.ghalam.data.Note
 import retrofit2.Call

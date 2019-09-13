@@ -1,4 +1,4 @@
-package ir.siriusapps.ghalam.network
+package ir.siriusapps.ghalam.data.source.remote
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
