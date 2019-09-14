@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
 import ir.siriusapps.ghalam.EventObserver
 import ir.siriusapps.ghalam.R
 import ir.siriusapps.ghalam.databinding.NotesFragmentBinding
+import kotlinx.android.synthetic.main.notes_fragment.*
 import javax.inject.Inject
 
 class NotesFragment : DaggerFragment() {
@@ -36,7 +38,12 @@ class NotesFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.newNoteEvent.observe(this, EventObserver {
-            findNavController().navigate(R.id.action_notesFragment_to_noteFragment)
+            val extras = FragmentNavigatorExtras(newNoteLayout to "tr1")
+            findNavController().navigate(
+                R.id.action_notesFragment_to_noteFragment,
+                null,
+                null,
+                extras)
         })
     }
 
