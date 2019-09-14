@@ -6,11 +6,14 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import ir.siriusapps.ghalam.GhalamApp
 import ir.siriusapps.ghalam.di.module.BindingModule
+import ir.siriusapps.ghalam.di.module.ContextModule
 import ir.siriusapps.ghalam.di.module.GsonModule
+import ir.siriusapps.ghalam.di.module.RepositoryModule
 import ir.siriusapps.ghalam.di.scope.ApplicationScope
 
 @ApplicationScope
-@Component(modules = [GsonModule::class, BindingModule::class, AndroidInjectionModule::class])
+@Component(modules = [ContextModule::class, RepositoryModule::class, GsonModule::class,
+    BindingModule::class, AndroidInjectionModule::class])
 interface ApplicationComponent : AndroidInjector<GhalamApp> {
 
     @Component.Factory
