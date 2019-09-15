@@ -16,12 +16,4 @@ class ApiServiceTest {
         val response = call.execute()
         assert(response.isSuccessful)
     }
-
-    @Test
-    fun newNoteApiTest() {
-        val note = Note(title = "test title", content = "test content")
-        val call = apiService.getApis().newNote(note)
-        val response = call.execute()
-        assert(response.isSuccessful)
-    }
 }
