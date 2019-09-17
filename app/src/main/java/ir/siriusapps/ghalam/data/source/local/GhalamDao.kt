@@ -13,7 +13,7 @@ interface GhalamDao {
     @Insert
     fun saveNote(note: Note): Completable
 
-    @Query("SELECT * FROM Notes WHERE localId = :id")
+    @Query("SELECT * FROM Notes WHERE local_id = :id")
     fun getNote(id: String): Observable<Note>
 
     @Query("SELECT * FROM Notes")
