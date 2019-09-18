@@ -4,7 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import ir.siriusapps.ghalam.data.Content
 import ir.siriusapps.ghalam.data.Note
+import ir.siriusapps.ghalam.data.TextContent
 import ir.siriusapps.ghalam.data.source.local.GhalamDatabase
 import org.junit.After
 
@@ -42,10 +44,41 @@ class ExampleInstrumentedTest {
     fun insertAndGetNotes() {
         val note = Note()
         note.title = "test title"
-        database.ghalamDao().saveNote(note).test().assertComplete()
+
+        database.ghalamDao().saveNote(note).test().assertValue {
+            note.localId = it
+            return@assertValue it != 0L
+        }
+
+        val contents: MutableList<Content> = ArrayList()
+
+        val textContent = TextContent(note.localId, null, 0)
+        textContent.text = "test text content"
+
+        contents.add(textContent)
+
+        note.contentList = contents
+
+        database.ghalamDao().saveContents(contents).test().assertComplete()
+
+        database.ghalamDao().saveNote(note).test().assertValue {
+            val result = it
+            return@assertValue it != 0L
+        }
 
         database.ghalamDao().getAllNotes().test().assertValue {
-            return@assertValue it.get(0).title.equals(note.title)
+            val result = it
+            return@assertValue it.isNotEmpty()
+        }
+
+        database.ghalamDao().getContentsByNoteLocalId().test().assertValue {
+            val result = it
+            return@assertValue it.isNotEmpty()
+        }
+
+        database.ghalamDao().getNoteWithContent(note.localId).test().assertValue {
+            val result = it
+            return@assertValue it.note != null
         }
     }
 }
