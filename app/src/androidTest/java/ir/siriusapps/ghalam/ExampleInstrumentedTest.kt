@@ -4,10 +4,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import ir.siriusapps.ghalam.data.Content
 import ir.siriusapps.ghalam.data.Note
 import ir.siriusapps.ghalam.data.TextContent
+import ir.siriusapps.ghalam.data.source.Repository
 import ir.siriusapps.ghalam.data.source.local.GhalamDatabase
+import ir.siriusapps.ghalam.data.source.local.LocalNoteDataSource
 import org.junit.After
 
 import org.junit.Test
@@ -45,12 +46,7 @@ class ExampleInstrumentedTest {
         val note = Note()
         note.title = "test title"
 
-        database.ghalamDao().saveNote(note).test().assertValue {
-            note.localId = it
-            return@assertValue it != 0L
-        }
-
-        val contents: MutableList<Content> = ArrayList()
+        val contents: MutableList<TextContent> = ArrayList()
 
         val textContent = TextContent(note.localId, null, 0)
         textContent.text = "test text content"
@@ -59,26 +55,19 @@ class ExampleInstrumentedTest {
 
         note.contentList = contents
 
-        database.ghalamDao().saveContents(contents).test().assertComplete()
+        val repository = Repository(LocalNoteDataSource(database.ghalamDao()))
 
-        database.ghalamDao().saveNote(note).test().assertValue {
-            val result = it
-            return@assertValue it != 0L
+        repository.saveNote(note).test().assertValue {
+            note.localId = it
+            return@assertValue it > 0L
         }
 
-        database.ghalamDao().getAllNotes().test().assertValue {
-            val result = it
+        database.ghalamDao().getTextContentByNoteId(note.localId).test().assertValue {
             return@assertValue it.isNotEmpty()
         }
 
-        database.ghalamDao().getContentsByNoteLocalId().test().assertValue {
-            val result = it
-            return@assertValue it.isNotEmpty()
-        }
-
-        database.ghalamDao().getNoteWithContent(note.localId).test().assertValue {
-            val result = it
-            return@assertValue it.note != null
+        repository.getNote(note.localId).test().assertValue {
+            return@assertValue it.textContents!!.isNotEmpty()
         }
     }
 }

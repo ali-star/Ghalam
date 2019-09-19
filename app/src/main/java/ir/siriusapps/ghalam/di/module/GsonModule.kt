@@ -33,11 +33,7 @@ class GsonModule {
                     ContentType.TEXT.name.toLowerCase(Locale.ROOT) ->
                         return context.deserialize(json, TextContent::class.java)
                     ContentType.PHOTO.name.toLowerCase(Locale.ROOT) ->
-                        return context.deserialize(json, PhotoContent::class.java)
-                    ContentType.RECORDING.name.toLowerCase(Locale.ROOT) ->
-                        return context.deserialize(json, RecordingContent::class.java)
-                    ContentType.MUSIC.name.toLowerCase(Locale.ROOT) ->
-                        return context.deserialize(json, MusicContent::class.java)
+                        return context.deserialize(json, FileContent::class.java)
                 }
             }
             return null

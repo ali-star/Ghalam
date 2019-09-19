@@ -1,34 +1,53 @@
 package ir.siriusapps.ghalam.data.source.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import io.reactivex.Completable
 import io.reactivex.Single
-import ir.siriusapps.ghalam.data.Content
-import ir.siriusapps.ghalam.data.Note
-import ir.siriusapps.ghalam.data.NoteAndContents
+import io.reactivex.schedulers.Schedulers
+import ir.siriusapps.ghalam.data.*
 
 @Dao
 interface GhalamDao {
 
+    @Transaction
+    fun saveNoteWithContents(note: Note): Long {
+        val noteId = saveNote(note)
+
+        val textContents: MutableList<TextContent> = ArrayList()
+        val fileContents: MutableList<FileContent> = ArrayList()
+
+        note.contentList?.forEach {
+            if (it is TextContent)
+                textContents.add(it)
+            else if (it is FileContent)
+                fileContents.add(it)
+        }
+
+        if (textContents.isNotEmpty())
+            saveTextContents(textContents)
+
+        if (fileContents.isNotEmpty())
+            saveFileContents(fileContents)
+
+        return noteId
+    }
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveNote(note: Note): Single<Long>
-
-    @Query("SELECT * FROM Notes WHERE local_id = :id")
-    fun getNote(id: String): Single<Note>
-
-    @Query("SELECT * FROM Notes")
-    fun getAllNotes(): Single<List<Note>>
+    fun saveNote(note: Note): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveContents(textContents: List<Content>): Completable
+    fun saveTextContents(textContents: List<TextContent>)
 
-    @Query("SELECT * FROM textContents")
-    fun getContentsByNoteLocalId(): Single<List<Content>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveFileContents(fileContents: List<FileContent>)
+
+    @Query("SELECT * FROM textContents WHERE note_local_id = :localId")
+    fun getTextContentByNoteId(localId: Long): Single<List<TextContent>>
 
     @Query("SELECT * FROM Notes WHERE local_id = :localId")
-    fun getNoteWithContent(localId: Long): Single<NoteAndContents>
+    fun getNoteWithContents(localId: Long): Single<NoteAndContents>
+
+    @Query("SELECT * FROM Notes")
+    fun getNoteAllWithContents(): Single<List<NoteAndContents>>
 
 }

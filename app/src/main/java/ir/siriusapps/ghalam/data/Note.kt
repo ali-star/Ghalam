@@ -3,6 +3,7 @@ package ir.siriusapps.ghalam.data
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Entity(tableName = "Notes")
 data class Note(
@@ -38,7 +39,7 @@ class TextContent(noteLocalId: Long, noteId: String?, index: Int) : Content(note
     constructor(): this(0, null, 0)
 }
 
-@Entity(tableName = "FileContents")
+@Entity(tableName = "fileContents")
 open class FileContent(noteLocalId: Long, noteId: String?, contentType: ContentType?, index: Int) : Content(noteLocalId, noteId, contentType, index) {
 
     var filePath: String? = null
@@ -46,12 +47,6 @@ open class FileContent(noteLocalId: Long, noteId: String?, contentType: ContentT
 
     constructor(): this(0, "", null, 0)
 }
-
-class PhotoContent(noteLocalId: Long, noteId: String?, index: Int) : FileContent(noteLocalId, noteId, ContentType.PHOTO, index)
-
-class RecordingContent(noteLocalId: Long, noteId: String?, index: Int) : FileContent(noteLocalId, noteId, ContentType.RECORDING, index)
-
-class MusicContent(noteLocalId: Long, noteId: String?, index: Int) : FileContent(noteLocalId, noteId, ContentType.MUSIC, index)
 
 enum class ContentType(val value: Int) {
     TEXT(1), PHOTO(2), RECORDING(3), MUSIC(4);
@@ -73,6 +68,17 @@ class NoteAndContents {
     var note: Note? = null
 
     @Relation(parentColumn = "local_id", entityColumn = "note_local_id", entity = TextContent::class)
-    var contents: List<TextContent>? = null
+    var textContents: List<TextContent>? = null
+
+    @Relation(parentColumn = "local_id", entityColumn = "note_local_id", entity = FileContent::class)
+    var fileContents: List<FileContent>? = null
+
+    fun getContents(): MutableList<Content> {
+        val contents: MutableList<Content> = ArrayList()
+        textContents?.let { contents.addAll(it) }
+        fileContents?.let { contents.addAll(it) }
+        contents.sortByDescending { it.index }
+        return contents
+    }
 
 }
