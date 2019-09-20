@@ -17,6 +17,7 @@ interface GhalamDao {
         val fileContents: MutableList<FileContent> = ArrayList()
 
         note.contentList?.forEach {
+            it.noteLocalId = noteId
             if (it is TextContent)
                 textContents.add(it)
             else if (it is FileContent)

@@ -22,30 +22,29 @@ data class Note(
 
 @Entity(tableName = "contents")
 open class Content(
-    @ColumnInfo(name = "note_local_id") var noteLocalId: Long,
-    @SerializedName("note_id") @ColumnInfo(name = "note_id") var noteId: String?,
     @SerializedName("content_type") @ColumnInfo(name = "content_type") var contentType: ContentType?,
     @SerializedName("index") @ColumnInfo(name = "index") var index: Int?
 ) {
     var id: String? = null
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "local_content_id") var localContentId: Int? = null
-
+    @ColumnInfo(name = "note_local_id") var noteLocalId: Long? = null
+    @SerializedName("note_id") @ColumnInfo(name = "note_id") var noteId: String? = null
 }
 
 @Entity(tableName = "textContents")
-class TextContent(noteLocalId: Long, noteId: String?, index: Int) : Content(noteLocalId, noteId, ContentType.TEXT, index) {
+class TextContent(index: Int) : Content(ContentType.TEXT, index) {
     @SerializedName("text") var text: String? = null
 
-    constructor(): this(0, null, 0)
+    constructor(): this(0)
 }
 
 @Entity(tableName = "fileContents")
-open class FileContent(noteLocalId: Long, noteId: String?, contentType: ContentType?, index: Int) : Content(noteLocalId, noteId, contentType, index) {
+open class FileContent(contentType: ContentType?, index: Int) : Content(contentType, index) {
 
     var filePath: String? = null
     var size: Double? = null
 
-    constructor(): this(0, "", null, 0)
+    constructor(): this(null, 0)
 }
 
 enum class ContentType(val value: Int) {

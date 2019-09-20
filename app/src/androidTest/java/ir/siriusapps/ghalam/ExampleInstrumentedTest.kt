@@ -4,8 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
-import ir.siriusapps.ghalam.data.Note
-import ir.siriusapps.ghalam.data.TextContent
+import ir.siriusapps.ghalam.data.*
 import ir.siriusapps.ghalam.data.source.Repository
 import ir.siriusapps.ghalam.data.source.local.GhalamDatabase
 import ir.siriusapps.ghalam.data.source.local.LocalNoteDataSource
@@ -46,12 +45,16 @@ class ExampleInstrumentedTest {
         val note = Note()
         note.title = "test title"
 
-        val contents: MutableList<TextContent> = ArrayList()
+        val contents: MutableList<Content> = ArrayList()
 
-        val textContent = TextContent(note.localId, null, 0)
+        val textContent = TextContent(0)
         textContent.text = "test text content"
 
+        val fileContent = FileContent(ContentType.PHOTO, 1)
+        fileContent.filePath = "test file path"
+
         contents.add(textContent)
+        contents.add(fileContent)
 
         note.contentList = contents
 
