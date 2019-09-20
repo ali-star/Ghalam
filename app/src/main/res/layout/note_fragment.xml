@@ -1,98 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/newNoteLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:transitionName="tr1">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-            android:id="@+id/icon"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:scaleType="center"
-            android:src="@drawable/icon_58dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+    <data>
 
-    <ir.siriusapps.sview.widget.EditText
-            android:id="@+id/TitleEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_toRightOf="@+id/icon"
-            android:background="@color/transparent"
-            android:gravity="center_vertical"
-            android:hint="@string/title"
-            android:textSize="18sp"
-            android:maxLines="1"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="@+id/icon"
-            app:layout_constraintStart_toEndOf="@+id/icon"
-            app:layout_constraintTop_toTopOf="@+id/icon"
-            app:sview_typeface="@string/roboto_bold"
-            tools:ignore="RelativeOverlap" />
+        <variable
+                name="viewmodel"
+                type="ir.siriusapps.ghalam.note.NoteViewModel" />
 
-    <ir.siriusapps.sview.widget.EditText
-            android:id="@+id/editText"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:inputType="textMultiLine"
-            android:hint="@string/note"
-            android:gravity="top"
-            android:paddingStart="@dimen/basePadding"
-            android:paddingLeft="@dimen/basePadding"
-            android:paddingEnd="@dimen/basePadding"
-            android:paddingRight="@dimen/basePadding"
-            android:background="@color/transparent"
-            app:sview_typeface="@string/roboto_regular"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon" />
+    </data>
 
-    <ir.siriusapps.sview.widget.ImageView
-            android:id="@+id/photoButton"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/micButton"
-            android:layout_toLeftOf="@id/micButton"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintEnd_toStartOf="@+id/micButton"
-            app:layout_constraintTop_toTopOf="@+id/micButton"
-            app:sview_color="@color/gray"
-            app:sview_cornerRadius="1dp"
-            app:sview_res="@raw/insert_photo"
-            app:sview_resSize="28dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newNoteLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:transitionName="tr1">
 
-    <ir.siriusapps.sview.widget.ImageView
-            android:id="@+id/micButton"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:sview_color="@color/gray"
-            app:sview_cornerRadius="1dp"
-            app:sview_res="@raw/mic"
-            app:sview_resSize="28dp" />
+        <ImageView
+                android:id="@+id/icon"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="center"
+                android:src="@drawable/icon_58dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ir.siriusapps.sview.widget.EditText
+                android:id="@+id/TitleEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/icon"
+                android:layout_toRightOf="@+id/icon"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:hint="@string/title"
+                android:textSize="18sp"
+                android:maxLines="1"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="@+id/icon"
+                app:layout_constraintStart_toEndOf="@+id/icon"
+                app:layout_constraintTop_toTopOf="@+id/icon"
+                app:sview_typeface="@string/roboto_bold"
+                tools:ignore="RelativeOverlap" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/noteContentsRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:inputType="textMultiLine"
+                android:hint="@string/note"
+                android:gravity="top"
+                android:paddingStart="@dimen/basePadding"
+                android:paddingLeft="@dimen/basePadding"
+                android:paddingEnd="@dimen/basePadding"
+                android:paddingRight="@dimen/basePadding"
+                android:background="@color/transparent"
+                app:sview_typeface="@string/roboto_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/icon" />
+
+        <ir.siriusapps.sview.widget.ImageView
+                android:id="@+id/photoButton"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/micButton"
+                android:layout_toLeftOf="@id/micButton"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toStartOf="@+id/micButton"
+                app:layout_constraintTop_toTopOf="@+id/micButton"
+                app:sview_color="@color/gray"
+                app:sview_cornerRadius="1dp"
+                app:sview_res="@raw/insert_photo"
+                app:sview_resSize="28dp" />
+
+        <ir.siriusapps.sview.widget.ImageView
+                android:id="@+id/micButton"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:sview_color="@color/gray"
+                app:sview_cornerRadius="1dp"
+                app:sview_res="@raw/mic"
+                app:sview_resSize="28dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

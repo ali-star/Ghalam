@@ -29,10 +29,11 @@ class NotesFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = NotesFragmentBinding.inflate(inflater, container, false).apply {
+        val view = inflater.inflate(R.layout.notes_fragment, container, false)
+        viewDataBinding = NotesFragmentBinding.bind(view).apply {
             viewmodel = viewModel
         }
-        return viewDataBinding.root
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

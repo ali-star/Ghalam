@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+                name="TextContent"
+                type="ir.siriusapps.ghalam.data.TextContent" />
+
+        <variable
+                name="viewmodel"
+                type="ir.siriusapps.ghalam.note.NoteViewModel" />
+
+    </data>
+
+    <ir.siriusapps.sview.widget.EditText
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="@string/note"
+            android:text="@={TextContent.text}"
+            android:gravity="top"
+            android:paddingStart="@dimen/basePadding"
+            android:paddingLeft="@dimen/basePadding"
+            android:paddingEnd="@dimen/basePadding"
+            android:paddingRight="@dimen/basePadding"
+            android:background="@color/transparent"
+            app:sview_typeface="@string/roboto_regular"/>
+</layout>

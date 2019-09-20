@@ -11,7 +11,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "ir.siriusapps.ghalam"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -46,7 +46,7 @@ dependencies {
     androidTestImplementation "android.arch.core:core-testing:1.1.1"
 
     // Navigation component dependencies
-    def navigation_component_version = "2.2.0-alpha02"
+    def navigation_component_version = "2.2.0-alpha03"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_component_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_component_version"
 
@@ -62,6 +62,7 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava3:rxjava:3.0.0-RC2"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 
     // Room dependencies
     def room_version = "2.2.0-rc01"
@@ -79,5 +80,5 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_Version"
 
     // SView
-    implementation 'com.github.ali-star:SView:0dcf75b11e'
+    implementation 'com.github.ali-star:SView:67b60e6f99'
 }
