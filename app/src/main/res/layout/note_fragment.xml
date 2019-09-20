@@ -7,6 +7,10 @@
     <data>
 
         <variable
+                name="note"
+                type="ir.siriusapps.ghalam.data.Note" />
+
+        <variable
                 name="viewmodel"
                 type="ir.siriusapps.ghalam.note.NoteViewModel" />
 
@@ -43,6 +47,7 @@
                 android:background="@color/transparent"
                 android:gravity="center_vertical"
                 android:hint="@string/title"
+                android:text="@={note.title}"
                 android:textSize="18sp"
                 android:maxLines="1"
                 android:inputType="text"

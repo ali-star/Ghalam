@@ -64,20 +64,27 @@ enum class ContentType(val value: Int) {
 class NoteAndContents {
 
     @Embedded
-    var note: Note? = null
+    var note = Note()
 
     @Relation(parentColumn = "local_id", entityColumn = "note_local_id", entity = TextContent::class)
-    var textContents: List<TextContent>? = null
+    var textContents: MutableList<TextContent> = ArrayList()
 
     @Relation(parentColumn = "local_id", entityColumn = "note_local_id", entity = FileContent::class)
-    var fileContents: List<FileContent>? = null
+    var fileContents: MutableList<FileContent> = ArrayList()
 
     fun getContents(): MutableList<Content> {
         val contents: MutableList<Content> = ArrayList()
-        textContents?.let { contents.addAll(it) }
-        fileContents?.let { contents.addAll(it) }
+        contents.addAll(textContents)
+        contents.addAll(fileContents)
         contents.sortByDescending { it.index }
         return contents
+    }
+
+    fun addContent(content: Content) {
+        if (content is TextContent)
+            textContents.add(content)
+        else if (content is FileContent)
+            fileContents.add(content)
     }
 
 }

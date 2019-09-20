@@ -38,6 +38,7 @@ class NotesFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel.newNoteEvent.observe(this, EventObserver {
             val extras = FragmentNavigatorExtras(newNoteLayout to "tr1")
             findNavController().navigate(
@@ -46,6 +47,8 @@ class NotesFragment : DaggerFragment() {
                 null,
                 extras)
         })
+
+        viewModel.start()
     }
 
 }

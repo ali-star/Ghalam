@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import ir.siriusapps.ghalam.R
 import ir.siriusapps.ghalam.databinding.NoteFragmentBinding
+import kotlinx.android.synthetic.main.note_fragment.*
+import kotlinx.android.synthetic.main.note_fragment.view.*
 import javax.inject.Inject
 
 class NoteFragment : DaggerFragment() {
@@ -21,6 +25,8 @@ class NoteFragment : DaggerFragment() {
     private val viewModel by viewModels<NoteViewModel> { viewModelFactory }
 
     private lateinit var viewDataBinding: NoteFragmentBinding
+
+    private lateinit var adapter: NoteContentsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +41,9 @@ class NoteFragment : DaggerFragment() {
 
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
 
+        view.noteContentsRecyclerView.layoutManager = LinearLayoutManager(context)
+        view.noteContentsRecyclerView.setHasFixedSize(false)
+
         return view
     }
 
@@ -46,7 +55,22 @@ class NoteFragment : DaggerFragment() {
         }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val args = NoteFragmentArgs.fromBundle(arguments!!)
+        viewModel.start(args.noteLocalId)
+
+        adapter = NoteContentsAdapter(viewModel)
+        noteContentsRecyclerView.adapter = adapter
+
+        viewModel.noteLiveData.observe(this) {
+            adapter.setItems(it.getContents())
+        }
+    }
+
     override fun onDestroyView() {
+        viewModel.saveNote()
         super.onDestroyView()
     }
 

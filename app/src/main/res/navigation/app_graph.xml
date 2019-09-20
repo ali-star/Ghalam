@@ -22,5 +22,10 @@
     <fragment
             android:id="@+id/noteFragment"
             android:name="ir.siriusapps.ghalam.note.NoteFragment"
-            android:label="NoteFragment" />
+            android:label="NoteFragment" >
+        <argument
+                android:name="noteLocalId"
+                app:argType="long"
+                android:defaultValue="0L" />
+    </fragment>
 </navigation>
