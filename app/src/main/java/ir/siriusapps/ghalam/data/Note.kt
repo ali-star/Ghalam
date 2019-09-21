@@ -10,13 +10,13 @@ data class Note(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "local_id") var localId: Long,
     @SerializedName("id") @ColumnInfo(name = "id") var serverId: String? = null,
     @SerializedName("title") @ColumnInfo(name = "title") var title: String? = null,
-    @SerializedName("content_list") @Ignore var contentList: List<Content>? = null,
+    @SerializedName("content_list") @Ignore var contentList: MutableList<Content> = ArrayList(),
     @SerializedName("color") @ColumnInfo(name = "color") var color: Int? = null,
     @SerializedName("pinned") @ColumnInfo(name = "pinned") var pinned: Boolean? = false,
     @SerializedName("create_date") var createDate: Date? = null,
     @SerializedName("update_date") var updateDate: Date? = null) {
 
-    constructor() : this(0, null, null, null, null, null, null, null)
+    constructor() : this(0, null, null, ArrayList(), null, null, null, null)
 
 }
 
@@ -72,7 +72,7 @@ class NoteAndContents {
     @Relation(parentColumn = "local_id", entityColumn = "note_local_id", entity = FileContent::class)
     var fileContents: MutableList<FileContent> = ArrayList()
 
-    fun getContents(): MutableList<Content> {
+    private fun getContents(): MutableList<Content> {
         val contents: MutableList<Content> = ArrayList()
         contents.addAll(textContents)
         contents.addAll(fileContents)
@@ -80,11 +80,10 @@ class NoteAndContents {
         return contents
     }
 
-    fun addContent(content: Content) {
-        if (content is TextContent)
-            textContents.add(content)
-        else if (content is FileContent)
-            fileContents.add(content)
+    fun getNoteWithContents(): Note {
+        val note = note
+        note.contentList = getContents()
+        return note
     }
 
 }

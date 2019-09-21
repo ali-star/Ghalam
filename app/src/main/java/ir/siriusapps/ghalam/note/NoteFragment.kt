@@ -65,12 +65,15 @@ class NoteFragment : DaggerFragment() {
         noteContentsRecyclerView.adapter = adapter
 
         viewModel.noteLiveData.observe(this) {
-            adapter.setItems(it.getContents())
+            adapter.setItems(it.contentList)
+        }
+
+        micButton.setOnClickListener {
+            viewModel.saveNote()
         }
     }
 
     override fun onDestroyView() {
-        viewModel.saveNote()
         super.onDestroyView()
     }
 

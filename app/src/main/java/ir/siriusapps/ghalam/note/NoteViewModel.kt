@@ -2,12 +2,14 @@ package ir.siriusapps.ghalam.note
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import ir.siriusapps.ghalam.data.NoteAndContents
+import ir.siriusapps.ghalam.data.Content
+import ir.siriusapps.ghalam.data.Note
 import ir.siriusapps.ghalam.data.TextContent
 import ir.siriusapps.ghalam.data.source.Repository
 import javax.inject.Inject
@@ -18,11 +20,13 @@ class NoteViewModel @Inject constructor(
 
     private val disposables = CompositeDisposable()
 
-    private val _noteLiveDate = MutableLiveData<NoteAndContents>()
-    val noteLiveData: LiveData<NoteAndContents> = _noteLiveDate
+    private val _noteLiveDate = MutableLiveData<Note>()
+    val noteLiveData: LiveData<Note> = _noteLiveDate
+
+    val title = MutableLiveData<String>()
 
     fun start(noteLocalId: Long) {
-        // default value of Long is zero and generated id's in room starts from 1,
+        // default value of Long is zero and generated id's in room starts from one,
         // so if we got zero here it means this is a new note
         if (noteLocalId > 0) {
             loadNote(noteLocalId)
@@ -32,10 +36,10 @@ class NoteViewModel @Inject constructor(
     }
 
     private fun newNote() {
-        val noteAndContents = NoteAndContents()
+        val note = Note()
         val emptyTextContent = TextContent()
-        noteAndContents.textContents.add(emptyTextContent)
-        _noteLiveDate.value = noteAndContents
+        note.contentList.add(emptyTextContent)
+        _noteLiveDate.value = note
     }
 
     private fun loadNote(noteLocalId: Long) {
@@ -55,9 +59,13 @@ class NoteViewModel @Inject constructor(
     }
 
     fun saveNote() {
-        val note = noteLiveData.value?.note
-        note?.contentList = noteLiveData.value!!.getContents()
-        note?.let { repository.saveNote(it) }
+        val note = noteLiveData.value
+        note?.let {
+            note.title = title.value
+            disposables.add(
+                repository.saveNote(it).subscribeOn(Schedulers.io()).subscribe()
+            )
+        }
     }
 
 }

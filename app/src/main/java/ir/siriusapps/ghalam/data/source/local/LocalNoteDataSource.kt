@@ -1,6 +1,7 @@
 package ir.siriusapps.ghalam.data.source.local
 
 import io.reactivex.Single
+import io.reactivex.rxkotlin.subscribeBy
 import ir.siriusapps.ghalam.data.Note
 import ir.siriusapps.ghalam.data.NoteAndContents
 import ir.siriusapps.ghalam.data.source.NoteDataSource
@@ -13,11 +14,20 @@ class LocalNoteDataSource(private val ghalamDao: GhalamDao) : NoteDataSource {
         }
     }
 
-    override fun getNote(noteLocalId: Long): Single<NoteAndContents> {
-        return ghalamDao.getNoteWithContents(noteLocalId)
+    override fun getNote(noteLocalId: Long): Single<Note> {
+        return Single.fromCallable {
+            val noteAndContents = ghalamDao.getNoteWithContents(noteLocalId).blockingGet()
+            return@fromCallable noteAndContents.getNoteWithContents()
+        }
     }
 
-    override fun getAllNotes(): Single<List<NoteAndContents>> {
-        return ghalamDao.getNoteAllWithContents()
+    override fun getAllNotes(): Single<List<Note>> {
+        return Single.fromCallable {
+            val notes: MutableList<Note> = ArrayList()
+            ghalamDao.getNoteAllWithContents().blockingGet().forEach {
+                notes.add(it.getNoteWithContents())
+            }
+            return@fromCallable notes
+        }
     }
 }

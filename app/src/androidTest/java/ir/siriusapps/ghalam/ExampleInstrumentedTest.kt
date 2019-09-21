@@ -70,7 +70,7 @@ class ExampleInstrumentedTest {
         }
 
         repository.getNote(note.localId).test().assertValue {
-            return@assertValue it.textContents!!.isNotEmpty()
+            return@assertValue it.contentList.isNotEmpty()
         }
     }
 }

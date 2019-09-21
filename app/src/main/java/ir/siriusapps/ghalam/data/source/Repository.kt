@@ -11,11 +11,11 @@ class Repository (private val localDataSource: LocalNoteDataSource) : NoteDataSo
         return localDataSource.saveNote(note)
     }
 
-    override fun getNote(noteLocalId: Long): Single<NoteAndContents> {
+    override fun getNote(noteLocalId: Long): Single<Note> {
         return localDataSource.getNote(noteLocalId)
     }
 
-    override fun getAllNotes(): Single<List<NoteAndContents>> {
+    override fun getAllNotes(): Single<List<Note>> {
         return localDataSource.getAllNotes()
     }
 
