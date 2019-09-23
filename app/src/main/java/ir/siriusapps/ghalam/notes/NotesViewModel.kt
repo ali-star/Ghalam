@@ -21,6 +21,9 @@ class NotesViewModel @Inject constructor(
     private val _newNoteEvent = MutableLiveData<Event<Unit>>()
     val newNoteEvent: LiveData<Event<Unit>> = _newNoteEvent
 
+    private val _openNoteEvent = MutableLiveData<Event<Long>>()
+    val openNoteEvent: LiveData<Event<Long>> = _openNoteEvent
+
     private val _notesLiveData = MutableLiveData<MutableList<Note>>()
     val notesLiveData: LiveData<MutableList<Note>> = _notesLiveData
 
@@ -40,6 +43,10 @@ class NotesViewModel @Inject constructor(
 
     fun addNewNote() {
         _newNoteEvent.value = Event(Unit)
+    }
+
+    fun openNote(noteLocalId: Long) {
+        _openNoteEvent.value = Event((noteLocalId))
     }
 
 }

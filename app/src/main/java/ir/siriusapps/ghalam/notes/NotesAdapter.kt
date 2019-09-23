@@ -41,7 +41,7 @@ class NotesAdapter(private val viewModel: NotesViewModel) : RecyclerView.Adapter
 
         override fun bind(viewModel: NotesViewModel, item: Note) {
             binding.viewmodel = viewModel
-            binding.title = item.title
+            binding.note = item
             if (item.contentList.isNotEmpty()) {
                 val content = item.contentList[0]
                 if (content is TextContent)

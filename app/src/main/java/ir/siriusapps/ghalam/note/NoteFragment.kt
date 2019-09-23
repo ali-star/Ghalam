@@ -73,8 +73,4 @@ class NoteFragment : DaggerFragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
 }

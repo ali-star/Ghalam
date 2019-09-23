@@ -85,6 +85,15 @@ class NotesFragment : DaggerFragment() {
             adapter.setItems(it)
         }
 
+        viewModel.openNoteEvent.observe(this) { event ->
+            event.getContentIfNotHandled()?.let {
+                val destination =
+                    NotesFragmentDirections.actionNotesFragmentToNoteFragment(it)
+                val extras = FragmentNavigatorExtras(newNoteLayout to "tr1")
+                findNavController().navigate(destination, extras)
+            }
+        }
+
         viewModel.start()
     }
 

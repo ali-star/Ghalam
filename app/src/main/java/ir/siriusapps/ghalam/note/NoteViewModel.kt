@@ -48,8 +48,9 @@ class NoteViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onSuccess = {
-                        _noteLiveDate.value = it
+                    onSuccess = {note ->
+                        _noteLiveDate.value = note
+                        note.title.let { title.value = it }
                     },
                     onError = {
                         // TODO handel the error may rise when getting a note

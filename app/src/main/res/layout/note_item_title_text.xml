@@ -4,8 +4,8 @@
     <data>
 
         <variable
-                name="title"
-                type="String" />
+                name="note"
+                type="ir.siriusapps.ghalam.data.Note" />
 
         <variable
                 name="contentText"
@@ -30,14 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:onClick="@{() -> viewmodel.openNote(note.localId)}">
 
             <ir.siriusapps.sview.widget.TextView
                     android:id="@+id/titleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
-                    android:text="@{title}"
+                    android:text="@{note.title}"
                     app:sview_typeface="@string/roboto_bold"/>
 
             <ir.siriusapps.sview.widget.TextView
