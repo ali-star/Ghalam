@@ -1,8 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout>
 
-</RelativeLayout>
+    <data>
+
+        <variable
+                name="title"
+                type="String" />
+
+        <variable
+                name="contentText"
+                type="String" />
+
+        <variable
+                name="viewmodel"
+                type="ir.siriusapps.ghalam.notes.NotesViewModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/colorPrimary">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="vertical">
+
+            <ir.siriusapps.sview.widget.TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:text="@{title}"
+                    app:sview_typeface="@string/roboto_bold"/>
+
+            <ir.siriusapps.sview.widget.TextView
+                    android:id="@+id/contentTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:text="@{contentText}"
+                    app:sview_typeface="@string/roboto_regular"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

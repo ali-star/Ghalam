@@ -1,25 +1,61 @@
 package ir.siriusapps.ghalam.notes
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ir.siriusapps.ghalam.data.Note
+import ir.siriusapps.ghalam.data.TextContent
+import ir.siriusapps.ghalam.databinding.NoteItemTitleTextBinding
+import ir.siriusapps.ghalam.note.NoteContentsAdapter
 
-class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private val viewModel: NotesViewModel) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+
+    private var items: MutableList<Note> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return when (viewType) {
+            NoteContentsAdapter.VT_TEXT_CONTENT -> TextContentViewHolder.from(parent)
+            else -> TextContentViewHolder.from(parent)
+        }
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return items.size
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder.bind(viewModel, items[position])
     }
 
+    fun setItems(items: MutableList<Note>) {
+        this.items = items
+        notifyDataSetChanged()
+    }
 
-    class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    abstract class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        abstract fun bind(viewModel: NotesViewModel, item: Note)
+    }
+
+    class TextContentViewHolder(private val binding: NoteItemTitleTextBinding) : NoteViewHolder(binding.root) {
+
+        override fun bind(viewModel: NotesViewModel, item: Note) {
+            binding.viewmodel = viewModel
+            binding.title = item.title
+            if (item.contentList.isNotEmpty()) {
+                val content = item.contentList[0]
+                if (content is TextContent)
+                    binding.contentText = content.text
+            }
+            binding.executePendingBindings()
+        }
+        companion object {
+            fun from(parent: ViewGroup) : TextContentViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = NoteItemTitleTextBinding.inflate(layoutInflater, parent, false)
+                return TextContentViewHolder(binding)
+            }
+        }
 
     }
 

@@ -14,10 +14,10 @@ class NoteContentsAdapter(private val noteViewModel: NoteViewModel) : RecyclerVi
     private var items: MutableList<Content> = ArrayList()
 
     companion object {
-        private const val VT_TEXT_CONTENT = 1
-        private const val VT_FILE_CONTENT_PHOTO = 2
-        private const val VT_FILE_CONTENT_RECORDING = 3
-        private const val VT_FILE_CONTENT_MUSIC = 4
+        public const val VT_TEXT_CONTENT = 1
+        public const val VT_FILE_CONTENT_PHOTO = 2
+        public const val VT_FILE_CONTENT_RECORDING = 3
+        public const val VT_FILE_CONTENT_MUSIC = 4
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
@@ -55,7 +55,7 @@ class NoteContentsAdapter(private val noteViewModel: NoteViewModel) : RecyclerVi
         abstract fun bind(viewModel: NoteViewModel, item: Content)
     }
 
-    class TextContentViewHolder(private val binding: NoteTextContentBinding) :ContentViewHolder(binding.root) {
+    class TextContentViewHolder(private val binding: NoteTextContentBinding) : ContentViewHolder(binding.root) {
 
         override fun bind(viewModel: NoteViewModel, item: Content) {
             binding.viewmodel = viewModel

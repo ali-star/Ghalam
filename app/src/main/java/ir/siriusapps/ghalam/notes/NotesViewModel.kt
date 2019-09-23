@@ -8,6 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import ir.siriusapps.ghalam.Event
+import ir.siriusapps.ghalam.data.Note
 import ir.siriusapps.ghalam.data.source.Repository
 import javax.inject.Inject
 
@@ -20,13 +21,16 @@ class NotesViewModel @Inject constructor(
     private val _newNoteEvent = MutableLiveData<Event<Unit>>()
     val newNoteEvent: LiveData<Event<Unit>> = _newNoteEvent
 
+    private val _notesLiveData = MutableLiveData<MutableList<Note>>()
+    val notesLiveData: LiveData<MutableList<Note>> = _notesLiveData
+
     fun start() {
         disposables.add(repository.getAllNotes()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    val items = it
+                    _notesLiveData.value = it.toMutableList()
                 },
                 onError = {
 
