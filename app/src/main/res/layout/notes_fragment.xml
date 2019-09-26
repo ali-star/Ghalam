@@ -22,7 +22,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:paddingTop="72dp"
                 android:paddingBottom="66dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
@@ -99,6 +98,17 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView"
                 app:sview_cornerRadius="-1dp"
                 app:sview_res="@raw/menu" />
+
+        <ir.siriusapps.sview.widget.TextView
+                android:id="@+id/listTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/basePadding"
+                android:text="@string/all_notes"
+                app:layout_constraintStart_toStartOf="@id/menuButton"
+                app:layout_constraintTop_toBottomOf="@id/searchView"
+                android:textColor="@color/gray_darker"
+                android:textSize="23sp"/>
 
         <RelativeLayout
                 android:id="@+id/newNoteLayout"

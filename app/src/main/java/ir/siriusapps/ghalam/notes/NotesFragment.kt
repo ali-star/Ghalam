@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.android.support.DaggerFragment
@@ -19,7 +19,6 @@ import ir.siriusapps.ghalam.R
 import ir.siriusapps.ghalam.databinding.NotesFragmentBinding
 import ir.siriusapps.sview.Utils
 import kotlinx.android.synthetic.main.notes_fragment.*
-import kotlinx.android.synthetic.main.notes_fragment.newNoteLayout
 import kotlinx.android.synthetic.main.notes_fragment.view.*
 import javax.inject.Inject
 
@@ -67,6 +66,19 @@ class NotesFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        listTitleTextView.viewTreeObserver.addOnGlobalLayoutListener (object : ViewTreeObserver.OnGlobalLayoutListener{
+            override fun onGlobalLayout() {
+                listTitleTextView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                notesRecyclerView.setPadding(
+                    notesRecyclerView.paddingLeft,
+                    Utils.dipToPix(88) + listTitleTextView.height,
+                    notesRecyclerView.paddingRight,
+                    notesRecyclerView.paddingBottom
+                )
+            }
+        })
 
         adapter = NotesAdapter(viewModel)
 

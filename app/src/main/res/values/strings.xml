@@ -8,4 +8,5 @@
     <string name="take_a_note">Take a note…</string>
     <string name="title">Title</string>
     <string name="note">Note…</string>
+    <string name="all_notes">All Notes</string>
 </resources>
