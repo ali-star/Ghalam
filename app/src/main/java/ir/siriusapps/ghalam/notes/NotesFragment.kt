@@ -67,6 +67,7 @@ class NotesFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        // Setting top padding of the notesRecyclerView
         listTitleTextView.viewTreeObserver.addOnGlobalLayoutListener (object : ViewTreeObserver.OnGlobalLayoutListener{
             override fun onGlobalLayout() {
                 listTitleTextView.viewTreeObserver.removeOnGlobalLayoutListener(this)

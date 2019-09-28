@@ -9,172 +9,191 @@
                 type="ir.siriusapps.ghalam.notes.NotesViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
-            android:background="@color/colorPrimaryDark"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            tools:openDrawer="start">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/notesRecyclerView"
-                android:layout_width="match_parent"
+        <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:paddingBottom="66dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:overScrollMode="never"
-                android:clipToPadding="false"/>
+                android:layout_gravity="start"
+                android:fitsSystemWindows="true"
+                app:headerLayout="@layout/menu_header"
+                android:background="@color/white"/>
 
-        <ir.siriusapps.sview.widget.ImageView
-                android:id="@+id/imageView"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="@dimen/basePadding"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/avatar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:sview_cornerRadius="-1dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
+                android:layout_height="match_parent">
 
-        <ir.siriusapps.sview.widget.RelativeLayout
-                android:id="@+id/searchView"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="@dimen/basePadding"
-                android:layout_marginEnd="@dimen/basePadding"
-                android:layout_marginRight="@dimen/basePadding"
-                android:layout_marginStart="@dimen/basePadding"
-                android:layout_marginLeft="@dimen/basePadding"
-                android:background="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/imageView"
-                app:layout_constraintStart_toEndOf="@+id/menuButton"
-                app:layout_constraintTop_toTopOf="parent"
-                app:sview_cornerRadius="-1dp">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/notesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingBottom="66dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:overScrollMode="never"
+                    android:clipToPadding="false"/>
 
             <ir.siriusapps.sview.widget.ImageView
-                    android:id="@+id/changeListLayout"
+                    android:id="@+id/imageView"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="@dimen/basePadding"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/avatar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sview_cornerRadius="-1dp" />
+
+            <ir.siriusapps.sview.widget.RelativeLayout
+                    android:id="@+id/searchView"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/basePadding"
+                    android:layout_marginEnd="@dimen/basePadding"
+                    android:layout_marginRight="@dimen/basePadding"
+                    android:layout_marginStart="@dimen/basePadding"
+                    android:layout_marginLeft="@dimen/basePadding"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/menuButton"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sview_cornerRadius="-1dp">
+
+                <ir.siriusapps.sview.widget.ImageView
+                        android:id="@+id/changeListLayout"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/basePadding"
+                        android:padding="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/searchView"
+                        app:layout_constraintEnd_toStartOf="@id/searchView"
+                        app:layout_constraintTop_toTopOf="@id/searchView"
+                        app:sview_color="@color/gray"
+                        app:sview_res="@raw/view_agenda" />
+
+                <ir.siriusapps.sview.widget.EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="28dp"
+                        android:layout_toStartOf="@+id/changeListLayout"
+                        android:background="@color/transparent"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/search"
+                        android:textSize="16sp"
+                        app:sview_typeface="@string/roboto_regular" />
+
+            </ir.siriusapps.sview.widget.RelativeLayout>
+
+            <ir.siriusapps.sview.widget.ImageView
+                    android:id="@+id/menuButton"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/basePadding"
-                    android:padding="4dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/searchView"
-                    app:layout_constraintEnd_toStartOf="@id/searchView"
-                    app:layout_constraintTop_toTopOf="@id/searchView"
-                    app:sview_color="@color/gray"
-                    app:sview_res="@raw/view_agenda" />
-
-            <ir.siriusapps.sview.widget.EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="28dp"
-                    android:layout_toStartOf="@+id/changeListLayout"
-                    android:background="@color/transparent"
-                    android:gravity="start|center_vertical"
-                    android:hint="@string/search"
-                    android:textSize="16sp"
-                    app:sview_typeface="@string/roboto_regular" />
-
-        </ir.siriusapps.sview.widget.RelativeLayout>
-
-        <ir.siriusapps.sview.widget.ImageView
-                android:id="@+id/menuButton"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginStart="@dimen/basePadding"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView"
-                app:sview_cornerRadius="-1dp"
-                app:sview_res="@raw/menu" />
-
-        <ir.siriusapps.sview.widget.TextView
-                android:id="@+id/listTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/basePadding"
-                android:text="@string/all_notes"
-                app:layout_constraintStart_toStartOf="@id/menuButton"
-                app:layout_constraintTop_toBottomOf="@id/searchView"
-                android:textColor="@color/gray_darker"
-                android:textSize="23sp"/>
-
-        <RelativeLayout
-                android:id="@+id/newNoteLayout"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:background="@color/white"
-                android:transitionName="tr1"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="@{() -> viewmodel.addNewNote()}">
-
-            <ImageView
-                    android:id="@+id/icon"
-                    android:layout_width="58dp"
-                    android:layout_height="58dp"
-                    android:scaleType="center"
-                    android:src="@drawable/icon_58dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    tools:ignore="ContentDescription" />
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginStart="@dimen/basePadding"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    app:sview_cornerRadius="-1dp"
+                    app:sview_res="@raw/menu" />
 
             <ir.siriusapps.sview.widget.TextView
-                    android:id="@+id/newNoteTitleTextView"
+                    android:id="@+id/listTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/icon"
-                    android:textColor="@color/hintColor"
-                    android:textSize="16sp"
-                    android:text="@string/take_a_note"
-                    app:sview_typeface="@string/roboto_regular"
-                    tools:ignore="RelativeOverlap" />
+                    android:layout_marginTop="@dimen/basePadding"
+                    android:text="@string/all_notes"
+                    app:layout_constraintStart_toStartOf="@id/menuButton"
+                    app:layout_constraintTop_toBottomOf="@id/searchView"
+                    android:textColor="@color/gray_darker"
+                    android:textSize="23sp"/>
 
-            <ir.siriusapps.sview.widget.ImageView
-                    android:id="@+id/photoButton"
-                    android:layout_width="58dp"
+            <RelativeLayout
+                    android:id="@+id/newNoteLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="58dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/micButton"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/white"
+                    android:transitionName="tr1"
                     android:clickable="true"
-                    app:sview_cornerRadius="1dp"
-                    app:sview_res="@raw/insert_photo"
-                    app:sview_color="@color/gray"
-                    app:sview_resSize="28dp"
-                    android:focusable="true" />
+                    android:focusable="true"
+                    android:onClick="@{() -> viewmodel.addNewNote()}">
 
-            <ir.siriusapps.sview.widget.ImageView
-                    android:id="@+id/micButton"
-                    android:layout_width="58dp"
-                    android:layout_height="58dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="8dp"
-                    app:sview_cornerRadius="1dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    app:sview_res="@raw/mic"
-                    app:sview_color="@color/gray"
-                    app:sview_resSize="28dp"
-                    android:focusable="true" />
+                <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:scaleType="center"
+                        android:src="@drawable/icon_58dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        tools:ignore="ContentDescription" />
 
-        </RelativeLayout>
+                <ir.siriusapps.sview.widget.TextView
+                        android:id="@+id/newNoteTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/icon"
+                        android:textColor="@color/hintColor"
+                        android:textSize="16sp"
+                        android:text="@string/take_a_note"
+                        app:sview_typeface="@string/roboto_regular"
+                        tools:ignore="RelativeOverlap" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ir.siriusapps.sview.widget.ImageView
+                        android:id="@+id/photoButton"
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/micButton"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        app:sview_cornerRadius="1dp"
+                        app:sview_res="@raw/insert_photo"
+                        app:sview_color="@color/gray"
+                        app:sview_resSize="28dp"
+                        android:focusable="true" />
+
+                <ir.siriusapps.sview.widget.ImageView
+                        android:id="@+id/micButton"
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="8dp"
+                        app:sview_cornerRadius="1dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        app:sview_res="@raw/mic"
+                        app:sview_color="@color/gray"
+                        app:sview_resSize="28dp"
+                        android:focusable="true" />
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 </layout>
