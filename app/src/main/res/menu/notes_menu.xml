@@ -4,5 +4,6 @@
 
     <item
             android:id="@+id/allNotes"
-            android:title="@string/all_notes" />
+            android:title="@string/all_notes"
+            android:icon="@drawable/round_category_black_24"/>
 </menu>

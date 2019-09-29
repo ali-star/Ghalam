@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -108,6 +109,8 @@ class NotesFragment : DaggerFragment() {
         }
 
         viewModel.start()
+
+        navigationView.menu[0].setChecked(true)
     }
 
 }
