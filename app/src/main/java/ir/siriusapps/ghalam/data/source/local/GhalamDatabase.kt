@@ -10,7 +10,7 @@ import ir.siriusapps.ghalam.data.TextContent
 import ir.siriusapps.ghalam.util.RoomContentTypeConverter
 import ir.siriusapps.ghalam.util.RoomDateConverter
 
-@Database(entities = [Note::class, Content::class, TextContent::class, FileContent::class], version = 2, exportSchema = false)
+@Database(entities = [Note::class, Content::class, TextContent::class, FileContent::class], version = 3, exportSchema = false)
 @TypeConverters(RoomDateConverter::class, RoomContentTypeConverter::class)
 abstract class GhalamDatabase : RoomDatabase() {
 

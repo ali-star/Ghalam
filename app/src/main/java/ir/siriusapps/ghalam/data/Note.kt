@@ -8,7 +8,6 @@ import kotlin.collections.ArrayList
 @Entity(tableName = "Notes")
 data class Note(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "local_id") var localId: Long,
-    @SerializedName("id") @ColumnInfo(name = "id") var serverId: String? = null,
     @SerializedName("title") @ColumnInfo(name = "title") var title: String? = null,
     @SerializedName("content_list") @Ignore var contentList: MutableList<Content> = ArrayList(),
     @SerializedName("color") @ColumnInfo(name = "color") var color: Int? = null,
@@ -16,10 +15,11 @@ data class Note(
     @SerializedName("create_date") var createDate: Date? = null,
     @SerializedName("update_date") var updateDate: Date? = null) {
 
-    constructor() : this(0, null, null, ArrayList(), null, null, null, null)
+    constructor() : this(0, null, ArrayList(), null, null, null, null)
 
 }
 
+// region Content
 @Entity(tableName = "contents")
 open class Content(
     @SerializedName("content_type") @ColumnInfo(name = "content_type") var contentType: ContentType?,
@@ -28,7 +28,6 @@ open class Content(
     var id: String? = null
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "local_content_id") var localContentId: Int? = null
     @ColumnInfo(name = "note_local_id") var noteLocalId: Long? = null
-    @SerializedName("note_id") @ColumnInfo(name = "note_id") var noteId: String? = null
 }
 
 @Entity(tableName = "textContents")
@@ -59,6 +58,17 @@ enum class ContentType(val value: Int) {
             return null
         }
     }
+}
+// endregion
+
+@Entity(tableName = "Labels")
+data class Lable(
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "local_id") var localId: Long,
+    @SerializedName("note_local_Id") @ColumnInfo(name = "note_local_Id") var noteLocalId: Long? = null,
+    @SerializedName("name") @ColumnInfo(name = "name") var name: String? = null,
+    @SerializedName("color") @ColumnInfo(name = "color") var color: Int? = null
+) {
+    constructor() : this(0, 0, null, null)
 }
 
 class NoteAndContents {
