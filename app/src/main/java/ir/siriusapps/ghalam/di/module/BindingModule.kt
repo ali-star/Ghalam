@@ -9,7 +9,7 @@ import ir.siriusapps.ghalam.di.scope.FragmentScope
 import ir.siriusapps.ghalam.note.NoteFragment
 import ir.siriusapps.ghalam.note.NoteViewModel
 import ir.siriusapps.ghalam.notes.NotesFragment
-import ir.siriusapps.ghalam.notes.NotesViewModel
+import ir.siriusapps.ghalam.NotesSharedViewModel
 
 @Module
 abstract class BindingModule {
@@ -21,8 +21,8 @@ abstract class BindingModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(NotesViewModel::class)
-    abstract fun bindNotesViewModel(viewModel: NotesViewModel): ViewModel
+    @ViewModelKey(NotesSharedViewModel::class)
+    abstract fun bindNotesSharedViewModel(viewModel: NotesSharedViewModel): ViewModel
     // endregion
 
     // region Note fragment

@@ -1,4 +1,4 @@
-package ir.siriusapps.ghalam.notes
+package ir.siriusapps.ghalam
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +12,7 @@ import ir.siriusapps.ghalam.data.Note
 import ir.siriusapps.ghalam.data.source.Repository
 import javax.inject.Inject
 
-class NotesViewModel @Inject constructor(
+class NotesSharedViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 

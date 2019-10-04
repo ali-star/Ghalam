@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
             android:id="@+id/allNotes"
             android:title="@string/all_notes"
-            android:icon="@drawable/round_category_black_24"/>
+            android:icon="@drawable/round_category_black_24"
+            android:checkable="true"/>
+
+    <item android:title="LABELS">
+        <menu>
+            <group android:id="@+id/labelsGroup"
+                    android:checkableBehavior="single">
+            </group>
+
+            <group android:orderInCategory="100">
+                <item
+                        android:id="@+id/label"
+                        android:title="@string/create_new_label"
+                        android:icon="@drawable/round_add_black_24"
+                        android:checkable="false"/>
+            </group>
+        </menu>
+    </item>
 </menu>

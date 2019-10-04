@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ir.siriusapps.ghalam.NotesSharedViewModel
 import ir.siriusapps.ghalam.data.Note
 import ir.siriusapps.ghalam.data.TextContent
 import ir.siriusapps.ghalam.databinding.NoteItemTitleTextBinding
 import ir.siriusapps.ghalam.note.NoteContentsAdapter
 
-class NotesAdapter(private val viewModel: NotesViewModel) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private val viewModel: NotesSharedViewModel) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private var items: MutableList<Note> = ArrayList()
 
@@ -34,12 +35,12 @@ class NotesAdapter(private val viewModel: NotesViewModel) : RecyclerView.Adapter
     }
 
     abstract class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        abstract fun bind(viewModel: NotesViewModel, item: Note)
+        abstract fun bind(viewModel: NotesSharedViewModel, item: Note)
     }
 
     class TextContentViewHolder(private val binding: NoteItemTitleTextBinding) : NoteViewHolder(binding.root) {
 
-        override fun bind(viewModel: NotesViewModel, item: Note) {
+        override fun bind(viewModel: NotesSharedViewModel, item: Note) {
             binding.viewmodel = viewModel
             binding.note = item
             if (item.contentList.isNotEmpty()) {

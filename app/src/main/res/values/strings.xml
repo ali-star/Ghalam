@@ -9,4 +9,5 @@
     <string name="title">Title</string>
     <string name="note">Note…</string>
     <string name="all_notes">All Notes</string>
+    <string name="create_new_label">Create new label</string>
 </resources>

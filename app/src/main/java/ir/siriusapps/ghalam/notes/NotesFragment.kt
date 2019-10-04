@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.android.support.DaggerFragment
 import ir.siriusapps.ghalam.EventObserver
+import ir.siriusapps.ghalam.NotesSharedViewModel
 import ir.siriusapps.ghalam.R
 import ir.siriusapps.ghalam.databinding.NotesFragmentBinding
 import ir.siriusapps.sview.Utils
@@ -28,7 +29,7 @@ class NotesFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by viewModels<NotesViewModel> { viewModelFactory }
+    private val viewModel by viewModels<NotesSharedViewModel> { viewModelFactory }
 
     private lateinit var viewDataBinding: NotesFragmentBinding
 
@@ -57,7 +58,7 @@ class NotesFragment : DaggerFragment() {
                 outRect.left = space
                 outRect.top = space
                 outRect.right = space
-                outRect.bottom =space
+                outRect.bottom = space
             }
 
         })
@@ -109,8 +110,6 @@ class NotesFragment : DaggerFragment() {
         }
 
         viewModel.start()
-
-        navigationView.menu[0].setChecked(true)
     }
 
 }

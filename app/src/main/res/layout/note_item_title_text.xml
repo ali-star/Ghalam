@@ -13,7 +13,7 @@
 
         <variable
                 name="viewmodel"
-                type="ir.siriusapps.ghalam.notes.NotesViewModel" />
+                type="ir.siriusapps.ghalam.NotesSharedViewModel" />
 
     </data>
 
