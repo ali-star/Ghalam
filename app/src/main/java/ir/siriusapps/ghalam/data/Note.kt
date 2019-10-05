@@ -62,7 +62,7 @@ enum class ContentType(val value: Int) {
 // endregion
 
 @Entity(tableName = "Labels")
-data class Lable(
+data class Label(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "local_id") var localId: Long,
     @SerializedName("note_local_Id") @ColumnInfo(name = "note_local_Id") var noteLocalId: Long? = null,
     @SerializedName("name") @ColumnInfo(name = "name") var name: String? = null,
@@ -70,6 +70,13 @@ data class Lable(
 ) {
     constructor() : this(0, 0, null, null)
 }
+
+@Entity(tableName = "NotesLabels")
+data class NotesLabels(
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Long,
+    @ColumnInfo(name = "label_local_id") val labelId: Long,
+    @ColumnInfo(name = "note_local_id") val noteId: Long
+)
 
 class NoteAndContents {
 
@@ -81,6 +88,9 @@ class NoteAndContents {
 
     @Relation(parentColumn = "local_id", entityColumn = "note_local_id", entity = FileContent::class)
     var fileContents: MutableList<FileContent> = ArrayList()
+
+    @Relation(parentColumn = "local_id", entityColumn = "note_local_id", entity = NotesLabels::class, projection = ["label_local_id"])
+    var labesIds: List<Long> = ArrayList()
 
     private fun getContents(): MutableList<Content> {
         val contents: MutableList<Content> = ArrayList()
