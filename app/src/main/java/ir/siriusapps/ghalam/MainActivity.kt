@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         initNavigationView()
     }
 
-    fun initNavigationView() {
+    private fun initNavigationView() {
         navigationView.itemBackground = navigationItemBackground()
         navigationView.menu[0].isChecked = true
 
