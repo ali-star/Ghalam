@@ -10,4 +10,8 @@
     <string name="note">Note…</string>
     <string name="all_notes">All Notes</string>
     <string name="create_new_label">Create new label</string>
+    <string name="new_label">New Label</string>
+    <string name="name_hint">Name…</string>
+    <string name="save_uppercase">SAVE</string>
+    <string name="cancel_uppercase">CANCEL</string>
 </resources>

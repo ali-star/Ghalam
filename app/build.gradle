@@ -48,7 +48,7 @@ dependencies {
     androidTestImplementation "android.arch.core:core-testing:1.1.1"
 
     // Navigation component dependencies
-    def navigation_component_version = "2.2.0-alpha03"
+    def navigation_component_version = "2.2.0-beta01"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_component_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_component_version"
 
@@ -67,7 +67,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 
     // Room dependencies
-    def room_version = "2.2.0-rc01"
+    def room_version = "2.2.0"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
@@ -82,5 +82,5 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_Version"
 
     // SView
-    implementation 'com.github.ali-star:SView:67b60e6f99'
+    implementation 'com.github.ali-star:SView:93cef5e76d'
 }

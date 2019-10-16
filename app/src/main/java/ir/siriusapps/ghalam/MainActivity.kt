@@ -8,6 +8,7 @@ import android.view.Menu
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
+import ir.siriusapps.ghalam.dialog.EditTextDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +25,15 @@ class MainActivity : AppCompatActivity() {
         navigationView.menu[0].isChecked = true
 
         val subMenu = navigationView.menu[1].subMenu
+
+        navigationView.setNavigationItemSelectedListener {
+            if (it.itemId == R.id.newLabel) {
+                val editTextDialog = EditTextDialog(this)
+                editTextDialog.show()
+            }
+            return@setNavigationItemSelectedListener true
+        }
+
         subMenu.add(R.id.labelsGroup, 123, Menu.NONE, "Test")
         subMenu.add(R.id.labelsGroup, 124, Menu.NONE, "Test 1")
         subMenu.add(R.id.labelsGroup, 125, Menu.NONE, "Test 2")

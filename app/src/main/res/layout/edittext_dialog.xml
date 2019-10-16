@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ir.siriusapps.sview.widget.RelativeLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:sview_cornerRadius="@dimen/default_corners"
+            android:background="@color/white">
+
+        <ir.siriusapps.sview.widget.TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_label"
+                android:textColor="@color/darkText"
+                app:sview_typeface="@string/roboto_regular"
+                android:textSize="14sp"/>
+
+        <ir.siriusapps.sview.widget.RelativeLayout
+                android:id="@+id/editTextBase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:sview_cornerRadius="@dimen/default_corners"
+                app:sview_strokeWidth="3dp"
+                app:sview_strokeColor="@color/black_05"
+                android:padding="8dp"
+                android:layout_below="@+id/titleTextView">
+
+            <ir.siriusapps.sview.widget.EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:inputType="textPersonName"
+                    android:background="@color/transparent"
+                    android:hint="@string/name_hint" />
+        </ir.siriusapps.sview.widget.RelativeLayout>
+
+        <ir.siriusapps.sview.widget.TextView
+                android:id="@+id/yesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/editTextBase"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp"
+                android:gravity="start"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/save_uppercase" />
+
+        <ir.siriusapps.sview.widget.TextView
+                android:id="@+id/noButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/yesButton"
+                android:layout_marginEnd="16dp"
+                android:layout_below="@id/editTextBase"
+                android:textSize="14sp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="start"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/cancel_uppercase" />
+
+    </ir.siriusapps.sview.widget.RelativeLayout>
+</LinearLayout>

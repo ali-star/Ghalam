@@ -15,10 +15,10 @@
 
             <group android:orderInCategory="100">
                 <item
-                        android:id="@+id/label"
+                        android:id="@+id/newLabel"
                         android:title="@string/create_new_label"
                         android:icon="@drawable/round_add_black_24"
-                        android:checkable="false"/>
+                        android:checkable="true"/>
             </group>
         </menu>
     </item>
