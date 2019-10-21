@@ -1,12 +1,25 @@
 package ir.siriusapps.ghalam.data.source.local
 
 import androidx.room.*
+import io.reactivex.Completable
 import io.reactivex.Single
 import ir.siriusapps.ghalam.data.*
 
 @Dao
 interface GhalamDao {
 
+    // region Label
+    @Insert
+    fun saveLable(label: Label): Completable
+
+    @Query("SELECT * FROM labels")
+    fun getLabels(): Single<List<Label>>
+
+    @Query("DELETE FROM Labels WHERE local_id = :localId")
+    fun deleteLabel(localId: Long): Completable
+    // endregion
+
+    // region Note
     @Transaction
     fun saveNoteWithContents(note: Note): Long {
         val noteLocalId = saveNote(note)
@@ -57,5 +70,6 @@ interface GhalamDao {
 
     @Query("SELECT * FROM Notes")
     fun getNoteAllWithContents(): Single<List<NoteAndContents>>
+    // endregion
 
 }

@@ -82,5 +82,5 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_Version"
 
     // SView
-    implementation 'com.github.ali-star:SView:93cef5e76d'
+    implementation 'com.github.ali-star:SView:6ed1ed80e0'
 }

@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
@@ -29,7 +30,15 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
             if (it.itemId == R.id.newLabel) {
                 val editTextDialog = EditTextDialog(this)
+                editTextDialog.title = getString(R.string.new_label)
+                editTextDialog.hint = getString(R.string.name_hint)
+                editTextDialog.yesButtonText = getString(R.string.save_uppercase)
+                editTextDialog.noButtonText = getString(R.string.cancel_uppercase)
+                editTextDialog.yesButtonClickListener = View.OnClickListener {
+
+                }
                 editTextDialog.show()
+                return@setNavigationItemSelectedListener false
             }
             return@setNavigationItemSelectedListener true
         }
