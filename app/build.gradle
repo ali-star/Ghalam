@@ -10,10 +10,10 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "ir.siriusapps.ghalam"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -38,17 +38,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.19.0'
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-core:3.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     testImplementation "android.arch.core:core-testing:1.1.1"
     androidTestImplementation "android.arch.core:core-testing:1.1.1"
 
     // Navigation component dependencies
-    def navigation_component_version = "2.2.0-beta01"
+    def navigation_component_version = "2.3.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_component_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_component_version"
 
@@ -59,27 +59,31 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     implementation 'com.squareup.okhttp3:logging-interceptor:4.1.1'
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
-    // RxJava
-    implementation "io.reactivex.rxjava3:rxjava:3.0.0-RC2"
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6"
 
     // Room dependencies
-    def room_version = "2.2.0"
+    def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     // Dagger dependencies
-    def dagger_Version = "2.24"
+    def dagger_Version = "2.28.1"
     implementation "com.google.dagger:dagger:$dagger_Version"
     implementation "com.google.dagger:dagger-android:$dagger_Version"
     implementation "com.google.dagger:dagger-android-support:$dagger_Version"
     kapt "com.google.dagger:dagger-compiler:$dagger_Version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_Version"
+
+    // Paging
+    def paging_version = "2.1.2"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    implementation(project(":data"))
+    implementation(project(":domain"))
 
     // SView
     implementation 'com.github.ali-star:SView:6ed1ed80e0'

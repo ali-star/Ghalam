@@ -5,7 +5,7 @@
 
         <variable
                 name="note"
-                type="ir.siriusapps.ghalam.data.Note" />
+                type="ir.siriusapps.ghalam.model.NoteItem" />
 
         <variable
                 name="contentText"
@@ -13,7 +13,7 @@
 
         <variable
                 name="viewmodel"
-                type="ir.siriusapps.ghalam.NotesSharedViewModel" />
+                type="ir.siriusapps.ghalam.ui.notes.NotesViewModel" />
 
     </data>
 
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:orientation="vertical"
-                android:onClick="@{() -> viewmodel.openNote(note.localId)}">
+                android:onClick="@{() -> viewmodel.openNote(note.id)}">
 
             <ir.siriusapps.sview.widget.TextView
                     android:id="@+id/titleTextView"

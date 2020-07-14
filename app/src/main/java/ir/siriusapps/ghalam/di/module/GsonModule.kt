@@ -3,7 +3,10 @@ package ir.siriusapps.ghalam.di.module
 import com.google.gson.*
 import dagger.Module
 import dagger.Provides
-import ir.siriusapps.ghalam.data.*
+import ir.sitiusapps.ghalam.domain.model.Content
+import ir.sitiusapps.ghalam.domain.model.ContentType
+import ir.sitiusapps.ghalam.domain.model.FileContent
+import ir.sitiusapps.ghalam.domain.model.TextContent
 import java.lang.reflect.Type
 import java.util.*
 
@@ -13,7 +16,8 @@ class GsonModule {
     @Provides
     fun gson(): Gson {
         val gsonBuilder = GsonBuilder()
-        gsonBuilder.registerTypeAdapter(Content::class.java,
+        gsonBuilder.registerTypeAdapter(
+            Content::class.java,
             ContentDeserializer()
         )
         return gsonBuilder.create()

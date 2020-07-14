@@ -5,11 +5,11 @@
 
         <variable
                 name="TextContent"
-                type="ir.siriusapps.ghalam.data.TextContent" />
+                type="ir.siriusapps.ghalam.model.TextContentItem" />
 
         <variable
                 name="viewmodel"
-                type="ir.siriusapps.ghalam.note.NoteViewModel" />
+                type="ir.siriusapps.ghalam.ui.note.NoteViewModel" />
 
     </data>
 

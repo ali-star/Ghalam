@@ -9,11 +9,13 @@ import ir.siriusapps.ghalam.di.module.BindingModule
 import ir.siriusapps.ghalam.di.module.ContextModule
 import ir.siriusapps.ghalam.di.module.GsonModule
 import ir.siriusapps.ghalam.di.module.RepositoryModule
-import ir.siriusapps.ghalam.di.scope.ApplicationScope
+import ir.sitiusapps.ghalam.domain.scope.ApplicationScope
 
 @ApplicationScope
-@Component(modules = [ContextModule::class, RepositoryModule::class, GsonModule::class,
-    BindingModule::class, AndroidInjectionModule::class])
+@Component(modules = [
+    ContextModule::class, RepositoryModule::class, GsonModule::class,
+    BindingModule::class, AndroidInjectionModule::class
+])
 interface ApplicationComponent : AndroidInjector<GhalamApp> {
 
     @Component.Factory

@@ -5,7 +5,7 @@
 
     <fragment
             android:id="@+id/splashFragment"
-            android:name="ir.siriusapps.ghalam.splash.SplashFragment"
+            android:name="ir.siriusapps.ghalam.ui.splash.SplashFragment"
             android:label="SplashFragment" >
         <action
                 android:id="@+id/action_splashFragment_to_notesFragment"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
             android:id="@+id/notesFragment"
-            android:name="ir.siriusapps.ghalam.notes.NotesFragment"
+            android:name="ir.siriusapps.ghalam.ui.notes.NotesFragment"
             android:label="NotesFragment" >
         <action
                 android:id="@+id/action_notesFragment_to_noteFragment"
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
             android:id="@+id/noteFragment"
-            android:name="ir.siriusapps.ghalam.note.NoteFragment"
+            android:name="ir.siriusapps.ghalam.ui.note.NoteFragment"
             android:label="NoteFragment" >
         <argument
                 android:name="noteLocalId"

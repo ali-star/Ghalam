@@ -5,11 +5,11 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import ir.siriusapps.ghalam.di.scope.FragmentScope
-import ir.siriusapps.ghalam.note.NoteFragment
-import ir.siriusapps.ghalam.note.NoteViewModel
-import ir.siriusapps.ghalam.notes.NotesFragment
-import ir.siriusapps.ghalam.NotesSharedViewModel
+import ir.sitiusapps.ghalam.domain.scope.FragmentScope
+import ir.siriusapps.ghalam.ui.note.NoteFragment
+import ir.siriusapps.ghalam.ui.note.NoteViewModel
+import ir.siriusapps.ghalam.ui.notes.NotesFragment
+import ir.siriusapps.ghalam.ui.notes.NotesViewModel
 
 @Module
 abstract class BindingModule {
@@ -21,8 +21,8 @@ abstract class BindingModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(NotesSharedViewModel::class)
-    abstract fun bindNotesSharedViewModel(viewModel: NotesSharedViewModel): ViewModel
+    @ViewModelKey(NoteViewModel::class)
+    abstract fun bindNotesSharedViewModel(viewModel: NoteViewModel): ViewModel
     // endregion
 
     // region Note fragment
@@ -32,8 +32,8 @@ abstract class BindingModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(NoteViewModel::class)
-    abstract fun bindNoteViewModel(viewModel: NoteViewModel): ViewModel
+    @ViewModelKey(NotesViewModel::class)
+    abstract fun bindNoteViewModel(viewModel: NotesViewModel): ViewModel
     // endregion
 
 }

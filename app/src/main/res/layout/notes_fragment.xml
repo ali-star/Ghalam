@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="viewmodel"
-                type="ir.siriusapps.ghalam.NotesSharedViewModel" />
+                type="ir.siriusapps.ghalam.ui.notes.NotesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

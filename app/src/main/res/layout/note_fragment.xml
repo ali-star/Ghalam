@@ -8,7 +8,7 @@
 
         <variable
                 name="viewmodel"
-                type="ir.siriusapps.ghalam.note.NoteViewModel" />
+                type="ir.siriusapps.ghalam.ui.note.NoteViewModel" />
 
     </data>
 
