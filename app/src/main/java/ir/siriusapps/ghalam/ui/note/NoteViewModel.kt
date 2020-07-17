@@ -3,13 +3,18 @@ package ir.siriusapps.ghalam.ui.note
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import ir.siriusapps.ghalam.model.NoteItem
+import ir.siriusapps.ghalam.model.NoteItemMapper
 import ir.siriusapps.ghalam.model.TextContentItem
+import ir.sitiusapps.ghalam.domain.usecase.SaveNoteUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NoteViewModel @Inject constructor(
-    private val gson: Gson
+    private val saveNoteUseCase: SaveNoteUseCase,
+    private val noteItemMapper: NoteItemMapper
 ) : ViewModel() {
 
     private val _noteLiveDate = MutableLiveData<NoteItem>()
@@ -17,24 +22,14 @@ class NoteViewModel @Inject constructor(
 
     val title = MutableLiveData<String>()
 
-    fun start(noteLocalId: Long) {
-        // default value of Long is zero and generated id's in room starts from one,
-        // so if we got zero here it means this is a new note
-        if (noteLocalId > 0) {
-            loadNote(noteLocalId)
-        } else {
-            newNote()
-        }
-    }
-
-    private fun newNote() {
+    fun newNote() {
         val note = NoteItem()
         val emptyTextContent = TextContentItem()
         note.contentList.add(emptyTextContent)
         _noteLiveDate.value = note
     }
 
-    private fun loadNote(noteLocalId: Long) {
+    fun loadNote(noteLocalId: Long) {
         /*disposables.add(
             repository.getNote(noteLocalId)
                 .subscribeOn(Schedulers.io())
@@ -52,6 +47,13 @@ class NoteViewModel @Inject constructor(
     }
 
     fun saveNote() {
+        viewModelScope.launch {
+            val note = noteLiveData.value
+            note?.let {
+                note.title = title.value
+                saveNoteUseCase.save(noteItemMapper.mapToDomain(noteLiveData.value!!))
+            }
+        }
         /*val note = noteLiveData.value
         note?.let {
             note.title = title.value

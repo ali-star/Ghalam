@@ -20,12 +20,11 @@ class NotesAdapter(private val viewModel: NotesViewModel) :
             override fun areItemsTheSame(oldConcert: NoteItem,
                                          newConcert: NoteItem) = oldConcert.id == newConcert.id
 
-            override fun areContentsTheSame(oldConcert: NoteItem,
-                                            newConcert: NoteItem) = oldConcert.toString() == newConcert.toString()
+            override fun areContentsTheSame(oldNote: NoteItem,
+                                            newNote: NoteItem): Boolean =
+                oldNote.toString() == newNote.toString()
         }
     }
-
-    private var items: MutableList<NoteItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return when (viewType) {
@@ -38,17 +37,10 @@ class NotesAdapter(private val viewModel: NotesViewModel) :
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder.bind(viewModel, items[position])
-    }
-
-    fun setItems(items: MutableList<NoteItem>) {
-        this.items = items
-        notifyDataSetChanged()
+        val note: NoteItem? = getItem(position)
+        if (note != null)
+            holder.bind(viewModel, note)
     }
 
     abstract class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

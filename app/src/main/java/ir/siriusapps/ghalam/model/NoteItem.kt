@@ -57,7 +57,7 @@ class NoteItemMapper @Inject constructor() : ItemMapper<Note, NoteItem> {
             contents.add(content)
         }
         return Note(
-            itemModel.id!!,
+            itemModel.id,
             itemModel.title,
             contents,
             itemModel.color,

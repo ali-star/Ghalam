@@ -2,9 +2,6 @@ package ir.siriusapps.ghalam.data.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import ir.sitiusapps.ghalam.domain.model.Content
-import ir.sitiusapps.ghalam.domain.model.FileContent
-import ir.sitiusapps.ghalam.domain.model.TextContent
 
 class NoteAndContents {
 

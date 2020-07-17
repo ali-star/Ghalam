@@ -17,7 +17,7 @@ import kotlin.collections.ArrayList
 
 @Entity(tableName = "Notes")
 data class NoteEntity(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Long? = null,
     @SerializedName("title") @ColumnInfo(name = "title") var title: String? = null,
     @SerializedName("content_list") @Ignore var contentList: MutableList<ContentEntity> = ArrayList(),
     @SerializedName("color") @ColumnInfo(name = "color") var color: Int? = null,

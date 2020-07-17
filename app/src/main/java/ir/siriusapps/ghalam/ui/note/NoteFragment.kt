@@ -58,11 +58,12 @@ class NoteFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val args =
-            NoteFragmentArgs.fromBundle(
-                requireArguments()
-            )
-        viewModel.start(args.noteLocalId)
+        val args = NoteFragmentArgs.fromBundle(requireArguments())
+
+        if (args.noteLocalId == 0L)
+            viewModel.newNote()
+        else
+            viewModel.loadNote(args.noteLocalId)
 
         adapter = NoteContentsAdapter(viewModel)
         noteContentsRecyclerView.adapter = adapter
